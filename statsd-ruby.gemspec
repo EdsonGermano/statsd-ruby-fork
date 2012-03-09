@@ -5,10 +5,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{statsd-ruby}
-  s.version = "0.3.0.github.1"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Rein Henrichs"]
+  s.authors = ["Rein Henrichs", "Aiden Scandella"]
   s.date = %q{2011-06-24}
   s.description = %q{A Statsd client in Ruby}
   s.email = %q{rein@phpfog.com}

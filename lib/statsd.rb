@@ -62,6 +62,8 @@ class Statsd
     send stat, value, 'g'
   end
 
+  def meter(stat); send_to_socket(stat) end
+
   # Sends a timing (in ms) for the given stat to the statsd server. The
   # sample_rate determines what percentage of the time this report is sent. The
   # statsd server then uses the sample_rate to correctly track the average

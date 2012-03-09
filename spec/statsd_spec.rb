@@ -89,6 +89,13 @@ describe Statsd do
     end
   end
 
+  describe "#meter" do
+    it "should send a simple message according to the metricsd spec" do
+      @statsd.meter('foobar')
+      @statsd.socket.recv.must_equal ['foobar']
+    end
+  end
+
   describe "#sampled" do
     describe "when the sample rate is 1" do
       it "should yield" do
