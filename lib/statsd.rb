@@ -62,7 +62,7 @@ class Statsd
     send stat, value, 'g'
   end
 
-  def meter(stat); send_to_socket(stat) end
+  def meter(stat); send_to_socket("#{prefix}#{stat}") end
 
   # Sends a timing (in ms) for the given stat to the statsd server. The
   # sample_rate determines what percentage of the time this report is sent. The
@@ -97,10 +97,13 @@ class Statsd
 
   def send(stat, delta, type, sample_rate=1)
     sampled(sample_rate) do
-      prefix = "#{@namespace}." unless @namespace.nil?
       stat = stat.to_s.gsub('::', '.').gsub(RESERVED_CHARS_REGEX, '_')
       send_to_socket("#{prefix}#{stat}:#{delta}|#{type}#{'|@' << sample_rate.to_s if sample_rate < 1}")
     end
+  end
+
+  def prefix
+    "#{@namespace}." unless @namespace.nil?
   end
 
   def send_to_socket(message)

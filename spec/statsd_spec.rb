@@ -142,6 +142,11 @@ describe Statsd do
       @statsd.timing('foobar', 500)
       @statsd.socket.recv.must_equal ['service.foobar:500|ms']
     end
+
+    it "should add namespace to meter" do
+      @statsd.meter('foobar')
+      @statsd.socket.recv.must_equal ['service.foobar']
+    end
   end
 
   describe "with logging" do
